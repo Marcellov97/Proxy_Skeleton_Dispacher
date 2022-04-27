@@ -37,7 +37,7 @@ public class DispacherProxy implements Dispacher {
 			
 			//attendo la risposta
 			
-			byte[] buffer = new byte[100];
+			byte[] buffer = new byte[100]; //TODO ridurre la dimensione del vettore di byte di risposta
 			DatagramPacket risposta = new DatagramPacket(buffer, buffer.length);
 			
 			socket.receive(risposta);
@@ -51,7 +51,34 @@ public class DispacherProxy implements Dispacher {
 	@Override
 	public int getCmd() {
 		// TODO Auto-generated method stub
-		return 0;
+		//creo il messaggio da inviare al Server
+		String mex = new String("getCmd#");
+		
+		//creo variabile per il ritorno
+		int temp = 0;
+		
+		//Creo il collegamento con la socket
+		try {
+			//pacchetto UDP da inviare
+			DatagramPacket request = new DatagramPacket(mex.getBytes(), mex.getBytes().length, InetAddress.getLocalHost(), 9000);
+			
+			//invio il pacchetto
+			socket.send(request);
+			
+			//attendo la risposta
+			byte[] buffer = new byte[100];
+			DatagramPacket risposta = new DatagramPacket(buffer, buffer.length);
+			socket.receive(risposta);
+			
+			//TODO controllare un modo più semplicep per far questo passaggio
+			temp = Integer.valueOf(new String(risposta.getData(), 0, risposta.getData().length)).intValue();
+			
+		}
+		catch(IOException ex) {
+			ex.getStackTrace();
+			
+		}
+		return temp;
 	}
 
 }
