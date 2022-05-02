@@ -18,7 +18,6 @@ public class DispacherSkeleton implements Dispacher {
 	}
 	
 	public void runSkeleton() {
-		// TODO metodo runSkeleton
 		implementazione = new DispacherImpl();
 		
 		try {
@@ -31,7 +30,20 @@ public class DispacherSkeleton implements Dispacher {
 			int port = pacchetto.getPort();
 			int lenght = pacchetto.getLength();
 			byte[] data = pacchetto.getData();
-			// TODO continuare metodo
+			// trasformo il messaggio in stringa ed estraggo le info
+			String messaggio = new String(data);
+			String[] info = messaggio.split("#");
+			
+			//controllo quale metodo richiamare
+			if(info[0] == "sendCmd") {
+				int command = Integer.parseInt(info[1]);
+				this.sendCmd(command);
+			}
+			else {
+				if(info[0] == "getCmd") {
+					this.getCmd();
+				}
+			}
 		}
 		catch(Exception ex) {
 			ex.getStackTrace();
@@ -41,13 +53,13 @@ public class DispacherSkeleton implements Dispacher {
 
 	@Override
 	public void sendCmd(int command) {
-		// TODO Auto-generated method stub
+		implementazione.sendCmd(command);
 
 	}
 
 	@Override
 	public int getCmd() {
-		// TODO Auto-generated method stub
+		implementazione.getCmd();
 		return 0;
 	}
 
