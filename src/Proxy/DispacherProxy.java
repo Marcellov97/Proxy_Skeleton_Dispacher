@@ -70,7 +70,7 @@ public class DispacherProxy implements Dispacher {
 			DatagramPacket risposta = new DatagramPacket(buffer, buffer.length);
 			socket.receive(risposta);
 			
-			//TODO controllare un modo più semplicep per far questo passaggio
+			//TODO controllare un modo più semplice per far questo passaggio
 			temp = Integer.valueOf(new String(risposta.getData(), 0, risposta.getData().length)).intValue();
 			
 		}
