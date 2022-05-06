@@ -9,6 +9,7 @@ public class DispacherSkeleton implements Dispacher {
 	private Dispacher implementazione;
 	
 	public DispacherSkeleton() {
+		implementazione = new DispacherImpl();
 		try {
 			socket = new DatagramSocket(9000);
 		}
@@ -18,7 +19,6 @@ public class DispacherSkeleton implements Dispacher {
 	}
 	
 	public void runSkeleton() {
-		implementazione = new DispacherImpl();
 		
 		try {
 			byte[] buffer = new byte[100];
