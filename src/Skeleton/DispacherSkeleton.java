@@ -54,7 +54,12 @@ public class DispacherSkeleton implements Dispacher {
 					int result = this.getCmd();
 					
 					//creo il messaggio di risposta
-					String mex = new String(String.valueOf(result));
+					String mex;
+					if(result == -1) {
+						mex = new String(String.valueOf(100));
+					}else {
+						mex = new String(String.valueOf(result));
+					}
 					
 					//pacchetto UDP
 					DatagramPacket risposta = new DatagramPacket(mex.getBytes(), 0, mex.getBytes().length, addr, port);

@@ -72,6 +72,7 @@ public class DispacherProxy implements Dispacher {
 			//TODO controllare un modo più semplice per far questo passaggio
 			temp = Integer.valueOf(new String(risposta.getData(), 0, risposta.getData().length)).intValue();
 			
+			
 		}
 		catch(IOException ex) {
 			ex.getStackTrace();
