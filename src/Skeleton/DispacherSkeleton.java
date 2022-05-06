@@ -44,7 +44,7 @@ public class DispacherSkeleton implements Dispacher {
 				String mex = new String(String.valueOf(0));
 				
 				//pacchetto UDP
-				DatagramPacket risposta = new DatagramPacket(mex.getBytes(), 0, mex.getBytes().length, addr, port);
+				DatagramPacket risposta = new DatagramPacket(mex.getBytes(), 0, lenght, addr, port);
 				
 				//invio pacchetto
 				socket.send(risposta);

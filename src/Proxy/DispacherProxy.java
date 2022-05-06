@@ -50,7 +50,6 @@ public class DispacherProxy implements Dispacher {
 
 	@Override
 	public int getCmd() {
-		// TODO Auto-generated method stub
 		//creo il messaggio da inviare al Server
 		String mex = new String("getCmd#");
 		
