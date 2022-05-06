@@ -34,14 +34,33 @@ public class DispacherSkeleton implements Dispacher {
 			String messaggio = new String(data);
 			String[] info = messaggio.split("#");
 			
+			
 			//controllo quale metodo richiamare
-			if(info[0] == "sendCmd") {
+			if(info[0] == "sendCmd") {	//send command
 				int command = Integer.parseInt(info[1]);
 				this.sendCmd(command);
+				
+				//creo il messaggio di risposta
+				String mex = new String(String.valueOf(0));
+				
+				//pacchetto UDP
+				DatagramPacket risposta = new DatagramPacket(mex.getBytes(), 0, mex.getBytes().length, addr, port);
+				
+				//invio pacchetto
+				socket.send(risposta);
 			}
 			else {
-				if(info[0] == "getCmd") {
-					this.getCmd();
+				if(info[0] == "getCmd") {	//get command
+					int result = this.getCmd();
+					
+					//creo il messaggio di risposta
+					String mex = new String(String.valueOf(result));
+					
+					//pacchetto UDP
+					DatagramPacket risposta = new DatagramPacket(mex.getBytes(), 0, mex.getBytes().length, addr, port);
+					
+					//invio pacchetto
+					socket.send(risposta);
 				}
 			}
 		}
