@@ -59,8 +59,8 @@ public class DispacherSkeleton implements Dispacher {
 
 	@Override
 	public int getCmd() {
-		implementazione.getCmd();
-		return 0;
+		int a = implementazione.getCmd();
+		return a;
 	}
 
 }
