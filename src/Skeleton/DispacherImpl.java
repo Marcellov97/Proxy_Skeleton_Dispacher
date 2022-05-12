@@ -79,7 +79,6 @@ public class DispacherImpl implements Dispacher {
 
 	@Override
 	public int getCmd() {
-		// TODO Auto-generated method stub
 		int res = this.pop();
 		return res;
 	}
