@@ -34,13 +34,14 @@ public class DispacherProxy implements Dispacher {
 			
 			//invio il pacchetto
 			socket.send(request);
-			
+			System.out.println("PROXY - inviato messaggio");
 			//attendo la risposta
 			
 			byte[] buffer = new byte[100]; //TODO ridurre la dimensione del vettore di byte di risposta
 			DatagramPacket risposta = new DatagramPacket(buffer, buffer.length);
 			
 			socket.receive(risposta);
+			System.out.println("PROXY - ricevuto risposta");
 		}
 		catch(IOException ex) {
 			ex.getStackTrace();
@@ -69,7 +70,7 @@ public class DispacherProxy implements Dispacher {
 			DatagramPacket risposta = new DatagramPacket(buffer, buffer.length);
 			socket.receive(risposta);
 			
-			//TODO controllare un modo più semplice per far questo passaggio
+			//TODO controllare un modo piï¿½ semplice per far questo passaggio
 			temp = Integer.valueOf(new String(risposta.getData(), 0, risposta.getData().length)).intValue();
 			
 			

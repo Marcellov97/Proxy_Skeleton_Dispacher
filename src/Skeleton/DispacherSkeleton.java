@@ -20,11 +20,16 @@ public class DispacherSkeleton implements Dispacher {
 	
 	public void runSkeleton() {
 		
+		System.out.println("Server avviato.");
+		
 		try {
-			byte[] buffer = new byte[100];
+			while(true) {
+				byte[] buffer = new byte[100];
 			DatagramPacket pacchetto = new DatagramPacket(buffer, buffer.length);
 			
+			System.out.println("Attendo l'arrivo di un comando...");
 			socket.receive(pacchetto);
+			System.out.println("Comando arrivato.");
 			//estraggo informazioni dal pacchetto
 			InetAddress addr = pacchetto.getAddress();
 			int port = pacchetto.getPort();
@@ -33,13 +38,15 @@ public class DispacherSkeleton implements Dispacher {
 			// trasformo il messaggio in stringa ed estraggo le info
 			String messaggio = new String(data);
 			String[] info = messaggio.split("#");
+			System.out.println(info[0]);
 			
 			
+			//TODO aggiustare la comparazione delle stringhe che non funziona
 			//controllo quale metodo richiamare
 			if(info[0] == "sendCmd") {	//send command
 				int command = Integer.parseInt(info[1]);
 				this.sendCmd(command);
-				
+				System.out.println("Comando sendCmd ricevuto");
 				//creo il messaggio di risposta
 				String mex = new String(String.valueOf(0));
 				
@@ -67,6 +74,11 @@ public class DispacherSkeleton implements Dispacher {
 					//invio pacchetto
 					socket.send(risposta);
 				}
+				else {
+					System.out.println("SKELETON - Non ho riconosciuto il comando");
+				}
+			}
+			
 			}
 		}
 		catch(Exception ex) {

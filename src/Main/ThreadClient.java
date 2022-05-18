@@ -23,6 +23,7 @@ public class ThreadClient extends Thread {
 				sleep(mills);
 				System.out.println("[INVIO n." + i + "] Invio il comando n." + command);
 				proxy.sendCmd(command);
+				System.out.println("Ho inviato il comando.");
 				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
