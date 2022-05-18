@@ -24,7 +24,8 @@ public class DispacherSkeleton implements Dispacher {
 		
 		try {
 			while(true) {
-				byte[] buffer = new byte[100];
+				System.out.println("Ricomincio il ciclo.");
+			byte[] buffer = new byte[100];
 			DatagramPacket pacchetto = new DatagramPacket(buffer, buffer.length);
 			
 			System.out.println("Attendo l'arrivo di un comando...");
@@ -43,7 +44,7 @@ public class DispacherSkeleton implements Dispacher {
 			
 			//TODO aggiustare la comparazione delle stringhe che non funziona
 			//controllo quale metodo richiamare
-			if(info[0] == "sendCmd") {	//send command
+			if(info[0].equals("sendCmd")) {	//send command
 				int command = Integer.parseInt(info[1]);
 				this.sendCmd(command);
 				System.out.println("Comando sendCmd ricevuto");
@@ -55,9 +56,10 @@ public class DispacherSkeleton implements Dispacher {
 				
 				//invio pacchetto
 				socket.send(risposta);
+				System.out.println("Ho inviato la risposta!!!!");
 			}
 			else {
-				if(info[0] == "getCmd") {	//get command
+				if(info[0].equals("getCmd")) {	//get command
 					int result = this.getCmd();
 					
 					//creo il messaggio di risposta
